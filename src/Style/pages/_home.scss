@@ -1,0 +1,36 @@
+
+
+.content-container {
+    min-height: calc(100vh - 175px);
+    max-width: 1200px;
+    margin: auto;
+}
+
+// form control
+
+
+.form-container {
+    max-width: 500px;
+    margin: auto;
+    border: 1px solid rgb(219, 202, 202);
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 1px rgb(219, 202, 202);
+    padding: 30px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.input-width {
+    max-width: 220px;
+    margin: auto;
+}
+
+.navbar {
+    margin-bottom: 70px;
+}
+
+.added-blog {
+    max-width: 1000px;
+}
