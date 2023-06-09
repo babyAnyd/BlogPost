@@ -1,6 +1,7 @@
 import React from "react";
 import { ModalEdit } from "../Components/ModalEdit";
 import { BlogButtons } from "../Components/BlogButtons";
+import { ContentPost } from "../Components/ModalContent";
 
 export const SaveContent = ({
   saveFormData,
@@ -39,6 +40,9 @@ export const SaveContent = ({
                     By {blogData.author} on {formatDate(blogData.date)}
                   </p>
                   <p className="card-text">{blogData.content}</p>
+                </div>
+                <div>
+                  <ContentPost blogData={blogData} />
                 </div>
                 <div className="card-footer">
                   <BlogButtons
