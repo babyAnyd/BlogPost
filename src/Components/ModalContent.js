@@ -1,7 +1,7 @@
 import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
 
-export const ContentPost = ({ blogData }) => {
+export const ContentPost = ({ blogData, formatDate }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleModalOpen = () => {
@@ -23,10 +23,10 @@ export const ContentPost = ({ blogData }) => {
         </Modal.Header>
         <Modal.Body>
           {blogData.content}
-          <p className="mb-0 mt-4 text-muted fs-5">{blogData.author}</p>
+          <p className="mb-0 mt-4  fs-5">{blogData.author}</p>
           <p className="">
             <i>
-              <small>Posted on {blogData.date}</small>
+              <small>Posted on {formatDate(blogData.date)}</small>
             </i>
           </p>
         </Modal.Body>

@@ -42,7 +42,7 @@ export const SaveContent = ({
                   <p className="card-text">{blogData.content}</p>
                 </div>
                 <div>
-                  <ContentPost blogData={blogData} />
+                  <ContentPost blogData={blogData} formatDate={formatDate} />
                 </div>
                 <div className="card-footer">
                   <BlogButtons

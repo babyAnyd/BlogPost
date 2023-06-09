@@ -6,12 +6,10 @@ export const Footer = () => {
     >
       <div className="container p-3">
         <div className="footer-body text-center">
-          <p className="p-0 m-0">Contact me at mywebsite@gmail.com</p>
-          <address className="p-0 m-0">
-            123 Main St. New York, State 1235
-          </address>
+          <p className="p-0 m-0">Contact me at baksBlogSpot@gmail.com</p>
+          <address className="p-0 m-0">Cebu, Philippines</address>
           <span className="text-muted">
-            © {new Date().getFullYear()} My Website. All rights reserved.
+            © {new Date().getFullYear()} Blog site. All rights reserved.
           </span>
         </div>
       </div>
