@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { BlogComponents } from "../Components/Content";
 import { SaveContent } from "../ReusablePage/SaveContent";
 import { handleClose } from "../FormUtinsils/EditUtinsils";
@@ -25,17 +25,20 @@ export const Blogs = () => {
     handleClose(setShow, setIsErrorMsg);
   };
 
-  const handleEditId = (id) => {
-    const blogs = saveFormData.find((blog) => blog.id === id);
-    if (blogs) {
-      setShow(true);
-      setEditBlogId(id);
-      setUpdateTitle(blogs.title);
-      setUpdateAuthor(blogs.author);
-      setUpdateDate(blogs.date);
-      setUpdateContent(blogs.content);
-    }
-  };
+  const handleEditId = useCallback(
+    (id) => {
+      const blogs = saveFormData.find((blog) => blog.id === id);
+      if (blogs) {
+        setShow(true);
+        setEditBlogId(id);
+        setUpdateTitle(blogs.title);
+        setUpdateAuthor(blogs.author);
+        setUpdateDate(blogs.date);
+        setUpdateContent(blogs.content);
+      }
+    },
+    [saveFormData]
+  );
 
   const handleUpdate = () => {
     const newUpdate = saveFormData.map((blog) =>
@@ -63,12 +66,16 @@ export const Blogs = () => {
     }
   };
 
-  const handleDeleteBlog = (id) => {
-    const deleteBlog = saveFormData.filter(
-      (blogDelete) => blogDelete.id !== id
-    );
-    setSaveFormData(deleteBlog);
-  };
+  //optimize delete function using useCallback hook
+  const handleDeleteBlog = useCallback(
+    (id) => {
+      const deleteBlog = saveFormData.filter(
+        (blogDelete) => blogDelete.id !== id
+      );
+      setSaveFormData(deleteBlog);
+    },
+    [saveFormData, setSaveFormData]
+  );
 
   //date format
   const formatDate = (dateString) => {
@@ -80,12 +87,19 @@ export const Blogs = () => {
     return formattedDate;
   };
 
+  const checkOptimizeTime = (id, phase, actualDuration) => {
+    console.log(`${id} ${phase} phase ${actualDuration}ms`);
+  };
+
   return (
     <div className="content-container">
-      <FilterData
-        saveFormData={saveFormData}
-        setFilteredDataList={setFilteredDataList}
-      />
+      <React.Profiler id="components" onRender={checkOptimizeTime}>
+        <FilterData
+          saveFormData={saveFormData}
+          setFilteredDataList={setFilteredDataList}
+        />
+      </React.Profiler>
+
       <div>
         {filteredDataList.length === 0 ? (
           <div className="post-container bg-light">

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 export const FilterData = ({ saveFormData, setFilteredDataList }) => {
   const [filterFrom, setFilterFrom] = useState("");
@@ -18,8 +18,9 @@ export const FilterData = ({ saveFormData, setFilteredDataList }) => {
     filterDataList(filterFrom, filterValue);
   };
 
-  const filterDataList = useCallback(
-    (fromDate, toDate) => {
+  //optimize filtering function using useMemo hook
+  const filterDataList = useMemo(() => {
+    return (fromDate, toDate) => {
       const filteredData = saveFormData.filter((data) => {
         const dataDate = new Date(data.date);
         const fromDateObj = new Date(fromDate);
@@ -29,11 +30,12 @@ export const FilterData = ({ saveFormData, setFilteredDataList }) => {
           (!toDate || dataDate <= toDateObj)
         );
       });
+      console.log("Check optimize speed");
       setFilteredDataList(filteredData);
-    },
-    [saveFormData, setFilteredDataList]
-  );
+    };
+  }, [saveFormData, setFilteredDataList]);
 
+  //render the updated data when filtered or not
   useEffect(() => {
     filterDataList(filterFrom, filterTo);
   }, [filterFrom, filterTo, filterDataList]);
