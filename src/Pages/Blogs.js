@@ -36,7 +36,9 @@ export const Blogs = () => {
         setUpdateDate(blogs.date);
         setUpdateContent(blogs.content);
       }
+      console.log("Check optimize speed in edit");
     },
+
     [saveFormData]
   );
 
